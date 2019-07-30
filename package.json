@@ -1,0 +1,35 @@
+{
+  "name": "ekitan-traino",
+  "version": "0.0.1",
+  "description": "Add the display of the train number to the train timetable.",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack --config webpack/webpack.dev.js --watch",
+    "build": "webpack --config webpack/webpack.prod.js",
+    "clean": "rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aoisupersix/ekitan-trainno.git"
+  },
+  "author": "aoisupersix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aoisupersix/ekitan-trainno/issues"
+  },
+  "homepage": "https://github.com/aoisupersix/ekitan-trainno#readme",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.86",
+    "@types/jquery": "^3.3.30",
+    "copy-webpack-plugin": "^5.0.4",
+    "rimraf": "^2.6.3",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6",
+    "webpack-merge": "^4.2.1"
+  }
+}

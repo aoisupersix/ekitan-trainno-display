@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "ekitan-trainno",
+  "description": "Add the display of the train number to the train timetable.",
+  "version": "0.0.1",
+
+  "content_scripts": [
+    {
+      "matches": ["https://ekitan.com/timetable/railway/train*"],
+      "js": ["js/vendor.js", "js/content_script.js"]
+    }
+  ]
+}
