@@ -1,14 +1,13 @@
 const webpack = require("webpack");
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-const srcDir = '../src/';
 
 module.exports = {
     entry: {
-        content_script: path.join(__dirname, srcDir + 'content_script.ts')
+        content_script: path.join(__dirname, '..', 'src', 'content_script.ts')
     },
     output: {
-        path: path.join(__dirname, '../dist/js'),
+        path: path.join(__dirname, '..', 'dist', 'js'),
         filename: '[name].js'
     },
     optimization: {
@@ -32,10 +31,14 @@ module.exports = {
     plugins: [
         // exclude locale files in moment
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new CopyPlugin([
-            { from: '.', to: '../' }
-          ],
-          {context: 'public' }
-        ),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: '.',
+                    to: '..',
+                    context: 'public',
+                }
+            ],
+        }),
     ]
 };
