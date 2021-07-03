@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 const txQuery = location.search
     .substring(1)
     .split('&')
@@ -8,10 +6,10 @@ const txQuery = location.search
 
 if (txQuery !== undefined) {
     const trainNo = txQuery.value.split('-')[2]
-    const titleSplitWithBr = $('.inner,.ek-onetrain-title-inner', document)
-        .html()
-        .split('<br>')
-    $('.inner,.ek-onetrain-title-inner', document).html(
-        `${titleSplitWithBr[0]}<br>${trainNo} ${titleSplitWithBr[1]}`
-    )
+    const title = document.querySelector('.inner,.ek-onetrain-title-inner')
+    const titleSplitWithBr = title?.innerHTML?.split('<br>')
+
+    if (title !== null && titleSplitWithBr !== undefined) {
+        title.innerHTML = `${titleSplitWithBr[0]}<br>${trainNo} ${titleSplitWithBr[1]}`
+    }
 }

@@ -18,9 +18,6 @@
     "url": "https://github.com/aoisupersix/ekitan-trainno/issues"
   },
   "homepage": "https://github.com/aoisupersix/ekitan-trainno#readme",
-  "dependencies": {
-    "jquery": "^3.6.0"
-  },
   "devDependencies": {
     "@types/chrome": "0.0.145",
     "@types/jquery": "^3.5.5",
