@@ -1,3 +1,5 @@
+import { extractTrainNameNo } from './model/trainnameno_extractor'
+
 const txQuery = location.search
     .substring(1)
     .split('&')
@@ -7,9 +9,17 @@ const txQuery = location.search
 if (txQuery !== undefined) {
     const trainNo = txQuery.value.split('-')[2]
     const title = document.querySelector('.inner,.ek-onetrain-title-inner')
-    const titleSplitWithBr = title?.innerHTML?.split('<br>')
+    const [route, trainInfo] = title?.innerHTML?.split('<br>') ?? [null, null]
+    const [trainName, destination] = trainInfo?.split('　') ?? [null, null]
+    const trainNameNo = extractTrainNameNo(trainName ?? '', trainNo)
+    const trainNameNoString = trainNameNo !== null ? `${trainNameNo}号` : ''
 
-    if (title !== null && titleSplitWithBr !== undefined) {
-        title.innerHTML = `${titleSplitWithBr[0]}<br>${trainNo} ${titleSplitWithBr[1]}`
+    if (
+        title !== null &&
+        route !== null &&
+        trainName !== null &&
+        destination !== null
+    ) {
+        title.innerHTML = `${route}<br>${trainNo} ${trainName}${trainNameNoString}　${destination}`
     }
 }
