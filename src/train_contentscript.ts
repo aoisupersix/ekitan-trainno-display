@@ -20,6 +20,7 @@ if (txQuery !== undefined) {
         trainName !== null &&
         destination !== null
     ) {
+        // eslint-disable-next-line no-irregular-whitespace
         title.innerHTML = `${route}<br>${trainNo} ${trainName}${trainNameNoString}　${destination}`
     }
 }
