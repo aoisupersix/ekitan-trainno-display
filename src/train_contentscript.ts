@@ -1,4 +1,4 @@
-import { extractTrainNameNo } from './model/trainnameno_extractor'
+import { extractTrainNameNo } from './models/trainnameno_extractor'
 
 const txQuery = location.search
     .substring(1)

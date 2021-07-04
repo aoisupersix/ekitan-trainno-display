@@ -1,4 +1,4 @@
-import { extractTrainNameNo } from '../model/trainnameno_extractor'
+import { extractTrainNameNo } from '../models/trainnameno_extractor'
 
 describe('extractTrainNameNo()', () => {
     describe('東北新幹線', () => {

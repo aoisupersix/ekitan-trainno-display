@@ -1,4 +1,4 @@
-import './../utility/trainno_util'
+import '../utilities/trainno_util'
 
 /**
  * 引数に指定された列車名と列車番号から列車の号数を取得します。
