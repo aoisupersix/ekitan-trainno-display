@@ -35,7 +35,7 @@ module.exports = merge(common, {
             port: 9060,
             reloadPage: true,
             entries: {
-                contentScript: 'content_script',
+                contentScript: 'train_contentscript',
                 background: 'background',
             }
         }),

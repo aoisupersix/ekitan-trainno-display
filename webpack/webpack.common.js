@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        content_script: path.join(__dirname, '..', 'src', 'content_script.ts')
+      train_contentscript: path.join(__dirname, '..', 'src', 'train_contentscript.ts')
     },
     output: {
         path: path.join(__dirname, '..', 'dist', 'js'),
