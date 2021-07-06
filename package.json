@@ -41,5 +41,8 @@
     "webpack-cli": "^4.7.2",
     "webpack-ext-reloader": "^1.1.6",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "zod": "^3.3.4"
   }
 }
