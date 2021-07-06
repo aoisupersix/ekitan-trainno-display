@@ -4,6 +4,8 @@ import {
     PagerTrainInformations,
 } from '../../models/pager_train_informations'
 
+jest.spyOn(console, 'error').mockImplementation()
+
 describe('pager_train_informations', () => {
     describe('getPagerTrainInformations()', () => {
         let trainInfoElement: HTMLElement
