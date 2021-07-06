@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 /**
  * 引数に指定されたHTML要素から1本前,1本後の列車の取得に使用する列車情報を取得して返します。
  * @param targetElement 子に列車情報のJSONが含まれるHTML要素
@@ -20,8 +22,15 @@ export const getPagerTrainInformations = (
         return null
     }
 
-    const pagerJson: PagerTrainInformations = JSON.parse(pagerJsonString)
-    return pagerJson
+    try {
+        const pagerJson = JSON.parse(pagerJsonString)
+        const pagerTrainInfos = PagerTrainInformationsSchema.parse(pagerJson)
+        return pagerTrainInfos
+    } catch (e) {
+        console.error(e)
+    }
+
+    return null
 }
 
 /**
@@ -45,21 +54,25 @@ export const findPagerTrainInformationFromDep = (
     return null
 }
 
-/**
- * 1本前,1本後の列車の取得に使用する全列車情報
- * timetabe/railway/trainのページ内に直接JSONが埋め込まれているので、そこから抜き出して取得する
- */
-export interface PagerTrainInformations {
-    data: {
-        [key: string]: PagerTrainInformation
-    }
-}
+const PagerTrainInformationSchema = z.object({
+    dep: z.string(),
+    next: z.string(),
+    prev: z.string(),
+})
+
+const PagerTrainInformationsSchema = z.object({
+    data: z.record(PagerTrainInformationSchema),
+})
 
 /**
  * 1本前,1本後の列車の取得に使用する1列車の列車情報
  */
-export interface PagerTrainInformation {
-    dep: string
-    next: string
-    prev: string
-}
+export type PagerTrainInformation = z.infer<typeof PagerTrainInformationSchema>
+
+/**
+ * 1本前,1本後の列車の取得に使用する全列車情報
+ * timetabe/railway/trainのページ内に直接JSONが埋め込まれているので、そこから抜き出して取得する
+ */
+export type PagerTrainInformations = z.infer<
+    typeof PagerTrainInformationsSchema
+>
