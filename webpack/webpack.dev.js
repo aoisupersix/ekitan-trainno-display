@@ -2,7 +2,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
+const ExtReloader = require('webpack-ext-reloader');
 
 const srcDir = path.join('..', 'src');
 
@@ -31,7 +31,7 @@ module.exports = merge(common, {
                 }
             ],
         }),
-        new ChromeExtensionReloader({
+        new ExtReloader({
             port: 9060,
             reloadPage: true,
             entries: {
