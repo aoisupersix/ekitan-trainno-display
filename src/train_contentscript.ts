@@ -1,4 +1,8 @@
+import { getPagerTrainInformations } from './models/pager_train_informations'
 import { extractTrainNameNo } from './models/trainnameno_extractor'
+
+const pagerTrainInfos = getPagerTrainInformations(document.body)
+console.log(pagerTrainInfos)
 
 const txQuery = location.search
     .substring(1)
