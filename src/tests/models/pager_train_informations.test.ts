@@ -1,4 +1,5 @@
 import {
+    findPagerTrainInformationFromDep,
     getPagerTrainInformations,
     PagerTrainInformations,
 } from '../../models/pager_train_informations'
@@ -62,6 +63,52 @@ describe('pager_train_informations', () => {
             expect(getPagerTrainInformations(document.head)).toStrictEqual(
                 trainInfos
             )
+        })
+    })
+    describe('findPagerTrainInformationFromDep()', () => {
+        let trainInfos: PagerTrainInformations
+
+        beforeEach(() => {
+            trainInfos = {
+                data: {
+                    '1234567-1234-1234M': {
+                        dep: '0720',
+                        prev: '1234567-1234-1233M',
+                        next: '1234567-1234-1235M',
+                    },
+                    '1234567-1234-1235M': {
+                        dep: '0730',
+                        prev: '1234567-1234-1234M',
+                        next: '1234567-1234-1236M',
+                    },
+                },
+            }
+        })
+
+        it('列車情報が空の場合はnullを返す', () => {
+            const infos: PagerTrainInformations = {
+                data: {},
+            }
+            expect(findPagerTrainInformationFromDep(infos, '0000')).toBeNull()
+        })
+
+        it('出発時刻が一致する列車情報が存在しない場合はnullを返す', () => {
+            expect(
+                findPagerTrainInformationFromDep(trainInfos, '0000')
+            ).toBeNull()
+        })
+
+        it('出発時刻が一致する列車情報が存在する場合は列車情報を返す', () => {
+            const result = findPagerTrainInformationFromDep(trainInfos, '0720')
+            expect(result).toBeDefined()
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const [tx, info] = result!
+            expect(tx).toBe('1234567-1234-1234M')
+            expect(info).toStrictEqual({
+                dep: '0720',
+                prev: '1234567-1234-1233M',
+                next: '1234567-1234-1235M',
+            })
         })
     })
 })
