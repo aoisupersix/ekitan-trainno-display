@@ -64,7 +64,7 @@ const updateTrainNoIfPageChanged = (): void => {
         return
     }
     const [tx] = info
-    console.log(tx)
+    displayTrainInfo(tx.split('-')[2])
 }
 
 // 列車情報の変更を監視して1本前/先ボタン押下時に列車番号の表示を変更する
