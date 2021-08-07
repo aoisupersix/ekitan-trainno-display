@@ -3,6 +3,8 @@
 
 # Ekitan TrainNo Display
 
+![](/images/scrn1280.png)
+
 [駅探](https://ekitan.com/)の電車時刻表に列車番号の表示を追加するChrome extensionです
 
 # Features
