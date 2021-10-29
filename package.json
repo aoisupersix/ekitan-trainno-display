@@ -22,7 +22,7 @@
   "homepage": "https://github.com/aoisupersix/ekitan-trainno#readme",
   "devDependencies": {
     "@types/chrome": "0.0.162",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "copy-webpack-plugin": "^9.0.1",
