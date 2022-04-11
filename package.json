@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/aoisupersix/ekitan-trainno#readme",
   "devDependencies": {
-    "@types/chrome": "0.0.180",
+    "@types/chrome": "0.0.181",
     "@types/jest": "^26.0.24",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
