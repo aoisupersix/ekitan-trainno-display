@@ -48,7 +48,15 @@ $ git clone https://github.com/aoisupersix/ekitan-trainno-display.git
 $ npm i
 
 # 開発用にパッケージング
-$ npm run watch
+$ npm start
+```
+
+コマンド実行後、`chrome://extensions`から、「パッケージ化されていない拡張機能を読み込む」→`dist/`ディレクトリを選択して拡張機能を有効にする
+
+# Test
+
+```
+npm test
 ```
 
 # License
