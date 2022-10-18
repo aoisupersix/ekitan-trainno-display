@@ -22,7 +22,7 @@ module.exports = merge(common, {
                     transform(content) {
                         const json = JSON.parse(content.toString());
                         json['background'] = {
-                            scripts: ['js/background.js']
+                            service_worker: 'js/background.js'
                         };
 
                         return JSON.stringify(json, null, 2);
