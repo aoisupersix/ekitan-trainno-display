@@ -3,11 +3,10 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "watch",
+			"script": "start",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "npm: watch",
-			"detail": "webpack --config webpack/webpack.dev.js --watch"
+			"label": "npm: start",
 		}
 	]
 }

@@ -2,15 +2,23 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-const ExtReloader = require('webpack-ext-reloader');
+const webpack = require('webpack');
 
+const hotReloadConfig = require('../mv3-hot-reload.config')
 const srcDir = path.join('..', 'src');
 
 module.exports = merge(common, {
     devtool: 'inline-source-map',
     mode: 'development',
     entry: {
-        background: path.join(__dirname, srcDir, 'background.ts'),
+        background: [
+          path.join(__dirname, srcDir, 'background'),
+          path.join('mv3-hot-reload', 'background'),
+        ],
+        content: [
+          path.join(__dirname, srcDir, 'content'),
+          path.join('mv3-hot-reload', 'content'),
+        ],
     },
     plugins: [
         // Add hot reload background script
@@ -22,7 +30,7 @@ module.exports = merge(common, {
                     transform(content) {
                         const json = JSON.parse(content.toString());
                         json['background'] = {
-                            scripts: ['js/background.js']
+                            service_worker: 'js/background.js'
                         };
 
                         return JSON.stringify(json, null, 2);
@@ -31,13 +39,8 @@ module.exports = merge(common, {
                 }
             ],
         }),
-        new ExtReloader({
-            port: 9060,
-            reloadPage: true,
-            entries: {
-                contentScript: 'train_contentscript',
-                background: 'background',
-            }
+        new webpack.EnvironmentPlugin({
+          MV3_HOT_RELOAD_PORT: hotReloadConfig.port,
         }),
     ],
 });
