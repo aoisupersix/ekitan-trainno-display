@@ -4,17 +4,11 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-      train_contentscript: path.join(__dirname, '..', 'src', 'train_contentscript.ts')
+      content: path.join(__dirname, '..', 'src', 'content')
     },
     output: {
         path: path.join(__dirname, '..', 'dist', 'js'),
         filename: '[name].js'
-    },
-    optimization: {
-        splitChunks: {
-            name: 'vendor',
-            chunks: "initial"
-        }
     },
     module: {
         rules: [

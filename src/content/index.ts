@@ -1,8 +1,12 @@
+// 開発時のホットリロード用
+// 本番ビルドでは処理は実行されない
+import 'mv3-hot-reload/content'
+
 import {
     findPagerTrainInformationFromDep,
     getPagerTrainInformations,
-} from './models/pager_train_informations'
-import { extractTrainNameNo } from './models/trainnameno_extractor'
+} from '../models/pager_train_informations'
+import { extractTrainNameNo } from '../models/trainnameno_extractor'
 
 // ページ切り替え用の列車情報取得
 const pagerTrainInfos = getPagerTrainInformations(document.body)
