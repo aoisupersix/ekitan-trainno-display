@@ -10,7 +10,8 @@
     "build": "webpack --config webpack/webpack.prod.js",
     "test": "jest",
     "lint": "eslint src",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "bumpup": "bash ./scripts/bumpup.sh"
   },
   "repository": {
     "type": "git",
