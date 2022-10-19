@@ -4,9 +4,13 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [master]
 
 jobs:
-  convert:
+  package:
     runs-on: ubuntu-latest
 
     strategy:
@@ -14,42 +18,69 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set version
         id: version
         run: |
           REPOSITORY=$(echo ${{ github.repository }} | sed -e "s#.*/##")
-          VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
-          echo ::set-output name=version::$VERSION
-          echo ::set-output name=filename::$REPOSITORY-$VERSION
+          VERSION=$(echo 'refs/tags/v0.0.2' | sed -e "s#refs/tags/v##g")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "filename=$REPOSITORY-$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Set git user
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Update manifest version
+        run: |
+          jq '.version="${{ steps.version.outputs.version }}"' public/manifest.json > tmp
+          mv tmp public/manifest.json
+
+      - name: Update package version
+        run: |
+          jq '.version="${{ steps.version.outputs.version }}"' package.json > tmp
+          mv tmp package.json
 
       - name: npm install and build
         run: |
           npm install
           npm run build
 
+      - name: Cat manifest.json and package.json
+        run: |
+          cat dist/manifest.json
+          cat package.json
+
+      - name: Push version changes
+        run: |
+          git add public/manifest.json package.json
+          git commit -m "chore: Bump up v${{ steps.version.outputs.version }}"
+          git push
+
+      - name: Check package
+        run: cat package.json
+
       - name: Packaging
         run: zip -r ${{ steps.version.outputs.filename }}.zip dist
+
+      - name: "Build Changelog"
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v3.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create release
         id: create_release
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload release asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.version.outputs.filename }}.zip
-          asset_name: ${{ steps.version.outputs.filename }}.zip
-          asset_content_type: application/zip
+          body: ${{ steps.build_changelog.outputs.changelog }}
+          files: ${{ steps.version.outputs.filename }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
