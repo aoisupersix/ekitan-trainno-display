@@ -40,22 +40,17 @@
 
 # Development
 
-```
-# リポジトリをクローン
-$ git clone https://github.com/aoisupersix/ekitan-trainno-display.git
-
-# 依存パッケージをインストール
-$ npm i
-
-# 開発用にパッケージング
-$ npm start
+```sh
+git clone https://github.com/aoisupersix/ekitan-trainno-display.git
+npm i
+npm start
 ```
 
 コマンド実行後、`chrome://extensions`から、「パッケージ化されていない拡張機能を読み込む」→`dist/`ディレクトリを選択して拡張機能を有効にする
 
 # Test
 
-```
+```sh
 npm test
 ```
 
