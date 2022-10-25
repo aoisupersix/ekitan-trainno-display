@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Ekitan TrainNo Display",
   "description": "駅探の電車時刻表に列車番号の表示を追加します",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
