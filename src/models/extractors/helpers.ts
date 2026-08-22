@@ -33,3 +33,16 @@ export const lastThreeDigitsWithOffset =
         const nameNo = (trainNoNumber(trainNo) % 1000) - offset
         return nameNo > 0 ? nameNo.toString() : null
     }
+
+/**
+ * 列車番号の下2桁にオフセットを足した値を号数として取得する処理を返します。
+ * (百の位・千の位が運転系統によって変わる列車向け)
+ * @param offset 下2桁に足すオフセット値
+ * @returns 号数取得処理。号数が正の値にならない場合はnullを返します
+ */
+export const lastTwoDigitsWithOffset =
+    (offset: number) =>
+    (trainNo: string): string | null => {
+        const nameNo = (trainNoNumber(trainNo) % 100) + offset
+        return nameNo > 0 ? nameNo.toString() : null
+    }

@@ -1,10 +1,17 @@
 import { TrainNameNoExtractor } from './types'
+import { lastThreeDigitsWithOffset } from './helpers'
 import '../../utilities/trainno_util'
 
 /**
- * JR北海道在来線特急の号数取得処理定義
+ * JR北海道在来線特急・快速の号数取得処理定義
  */
 export const jrHokkaidoExtractors: TrainNameNoExtractor[] = [
+    // 快速エアポート(区間快速・特別快速含む)
+    // 号数=列車番号の下3桁-800 (ex. エアポート11号: 3811M, 特別快速エアポート41号: 4841M)
+    {
+        name: /^(快速|区間快速|特別快速)?エアポート$/,
+        extract: lastThreeDigitsWithOffset(800),
+    },
     // 北斗
     {
         name: '北斗',

@@ -4,6 +4,9 @@ import { jrHokkaidoExtractors } from './jr_hokkaido'
 import { jrEastExtractors } from './jr_east'
 import { jrCentralExtractors } from './jr_central'
 import { jrWestExtractors } from './jr_west'
+import { jrShikokuExtractors } from './jr_shikoku'
+import { jrKyushuExtractors } from './jr_kyushu'
+import { privateRailwayExtractors } from './private_railways'
 
 /**
  * 列車の号数取得処理定義
@@ -15,6 +18,9 @@ export const extractors: TrainNameNoExtractor[] = [
     ...jrEastExtractors,
     ...jrCentralExtractors,
     ...jrWestExtractors,
+    ...jrShikokuExtractors,
+    ...jrKyushuExtractors,
+    ...privateRailwayExtractors,
     ...shinkansenExtractors,
 ]
 

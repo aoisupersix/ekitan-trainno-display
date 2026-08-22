@@ -2,6 +2,7 @@ import { TrainNameNoExtractor } from './types'
 import {
     lastThreeDigits,
     lastThreeDigitsWithOffset,
+    lastTwoDigitsWithOffset,
     trainNoNumber,
 } from './helpers'
 
@@ -12,16 +13,25 @@ import {
 export const jrEastExtractors: TrainNameNoExtractor[] = [
     // #region 中央線特急
     // あずさ
-    // 定期: 号数そのまま(1M~)もしくは5000番台(5003M~), 臨時: 8000/9000番台+号数
+    // 新宿発着: 号数そのまま(1M~)もしくは5000番台(5041M~),
+    // 千葉発着: 2100番台(2103M~), 臨時: 8000/9000番台+号数
     {
         name: 'あずさ',
-        extract: lastThreeDigits,
+        extract: lastTwoDigitsWithOffset(0),
     },
     // かいじ
-    // 5100番台+号数(5102M~5151M)のため下2桁を号数とします
+    // 5100番台(5102M~5159M)もしくは千葉発着の2100番台+号数
     {
         name: 'かいじ',
-        extract: (trainNo) => (trainNoNumber(trainNo) % 100).toString(),
+        extract: lastTwoDigitsWithOffset(0),
+    },
+    // #endregion
+
+    // #region 東海道線特急
+    // 湘南(3070番台+号数: 3071M~3089M)
+    {
+        name: '湘南',
+        extract: lastThreeDigitsWithOffset(70),
     },
     // #endregion
 
