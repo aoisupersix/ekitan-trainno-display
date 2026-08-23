@@ -15,10 +15,10 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [22.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set version
         id: version
@@ -29,13 +29,13 @@ jobs:
           echo "filename=$REPOSITORY-$VERSION" >> $GITHUB_OUTPUT
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: npm install and build
+      - name: npm ci and build
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Packaging
@@ -43,7 +43,7 @@ jobs:
 
       - name: "Build changelog"
         id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v3.4.0
+        uses: mikepenz/release-changelog-builder-action@v5
         with:
           configurationJson: |
             {
@@ -68,7 +68,7 @@ jobs:
 
       - name: Create release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body: ${{ steps.build_changelog.outputs.changelog }}
           files: ${{ steps.version.outputs.filename }}.zip

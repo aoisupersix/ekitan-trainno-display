@@ -1,4 +1,5 @@
-import { z } from 'zod'
+// バンドルサイズ削減のため軽量版のzod/miniを使用
+import * as z from 'zod/mini'
 
 /**
  * 引数に指定されたHTML要素から1本前,1本後の列車の取得に使用する列車情報を取得して返します。
@@ -61,7 +62,7 @@ const PagerTrainInformationSchema = z.object({
 })
 
 const PagerTrainInformationsSchema = z.object({
-    data: z.record(PagerTrainInformationSchema),
+    data: z.record(z.string(), PagerTrainInformationSchema),
 })
 
 /**
