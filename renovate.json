@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     ":timezone(Asia/Tokyo)"
   ],
   "minor": {
@@ -18,7 +18,7 @@
   },
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@types/"],
+      "matchPackageNames": ["/^@types//"],
       "automerge": true,
       "major": {
         "automerge": false

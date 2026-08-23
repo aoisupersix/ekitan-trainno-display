@@ -103,7 +103,7 @@ describe('pager_train_informations', () => {
         it('出発時刻が一致する列車情報が存在する場合は列車情報を返す', () => {
             const result = findPagerTrainInformationFromDep(trainInfos, '0720')
             expect(result).toBeDefined()
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
             const [tx, info] = result!
             expect(tx).toBe('1234567-1234-1234M')
             expect(info).toStrictEqual({
