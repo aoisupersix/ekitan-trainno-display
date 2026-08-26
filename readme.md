@@ -145,7 +145,7 @@ npm i
 npm start
 ```
 
-コマンド実行後、以下の手順で拡張機能を有効にする
+コマンド実行後、以下の手順で拡張機能を有効にする。
 
 - Chrome: `chrome://extensions`から「パッケージ化されていない拡張機能を読み込む」→`dist/`ディレクトリを選択
 - Firefox: `about:debugging#/runtime/this-firefox`から「一時的なアドオンを読み込む」→`dist/manifest.json`を選択
@@ -162,7 +162,7 @@ npm ci
 npm run build
 ```
 
-`dist/`ディレクトリにアドオン本体と同一のコードが生成されます。
+`dist/`ディレクトリにアドオン本体と同一のコードが生成される。
 
 # Test
 
