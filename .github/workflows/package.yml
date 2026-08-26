@@ -4,10 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_run:
-    workflows: [ci]
-    types: [completed]
-    branches: [master]
 
 jobs:
   package:
@@ -74,3 +70,21 @@ jobs:
           files: ${{ steps.version.outputs.filename }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # AMOはmanifest.jsonがzipのルートに必要なため、dist内をzip化する
+      - name: Packaging for Firefox Add-ons
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          (cd dist && zip -r ../${{ steps.version.outputs.filename }}-firefox.zip .)
+          git archive --format=zip --output=${{ steps.version.outputs.filename }}-source.zip HEAD
+
+      - name: Upload to Firefox Add-ons
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: wdzeng/firefox-addon@v1
+        with:
+          addon-guid: ekitan-trainno-display@aoisupersix.github.io
+          xpi-path: ${{ steps.version.outputs.filename }}-firefox.zip
+          source-file-path: ${{ steps.version.outputs.filename }}-source.zip
+          license: MIT
+          jwt-issuer: ${{ secrets.AMO_JWT_ISSUER }}
+          jwt-secret: ${{ secrets.AMO_JWT_SECRET }}

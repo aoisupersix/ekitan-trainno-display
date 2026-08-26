@@ -40,7 +40,8 @@ const displayTrainInfo = (trainNo: string): void => {
         destination !== null
     ) {
         // eslint-disable-next-line no-irregular-whitespace
-        title.innerHTML = `${route}<br>${trainNo} ${trainName}${trainNameNoString}　${destination}`
+        const trainLine = `${trainNo} ${trainName}${trainNameNoString}　${destination}`
+        title.replaceChildren(route, document.createElement('br'), trainLine)
     }
 }
 

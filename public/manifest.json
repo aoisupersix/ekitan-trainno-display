@@ -3,6 +3,16 @@
   "name": "Ekitan TrainNo Display",
   "description": "駅探の電車時刻表に列車番号の表示を追加します",
   "version": "0.1.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "ekitan-trainno-display@aoisupersix.github.io",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    },
+    "gecko_android": {}
+  },
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
