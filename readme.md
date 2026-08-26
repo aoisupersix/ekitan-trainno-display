@@ -150,6 +150,20 @@ npm start
 - Chrome: `chrome://extensions`から「パッケージ化されていない拡張機能を読み込む」→`dist/`ディレクトリを選択
 - Firefox: `about:debugging#/runtime/this-firefox`から「一時的なアドオンを読み込む」→`dist/manifest.json`を選択
 
+# Build
+
+要件:
+
+- Node.js 22.x（npm 10以上）
+- OS: Linux / macOS / Windows（リリースビルドはGitHub ActionsのUbuntu上で実行）
+
+```sh
+npm ci
+npm run build
+```
+
+`dist/`ディレクトリにアドオン本体と同一のコードが生成されます。
+
 # Test
 
 ```sh
