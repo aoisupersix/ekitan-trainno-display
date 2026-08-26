@@ -5,7 +5,8 @@
 
 ![](/images/scrn1280.png)
 
-[駅探](https://ekitan.com/)の電車時刻表に列車番号の表示を追加するChrome extensionです
+[駅探](https://ekitan.com/)の電車時刻表に列車番号の表示を追加するブラウザ拡張機能です。
+Chrome / Firefox（デスクトップ・Android）に対応しています。
 
 # Features
 
@@ -144,7 +145,10 @@ npm i
 npm start
 ```
 
-コマンド実行後、`chrome://extensions`から、「パッケージ化されていない拡張機能を読み込む」→`dist/`ディレクトリを選択して拡張機能を有効にする
+コマンド実行後、以下の手順で拡張機能を有効にする
+
+- Chrome: `chrome://extensions`から「パッケージ化されていない拡張機能を読み込む」→`dist/`ディレクトリを選択
+- Firefox: `about:debugging#/runtime/this-firefox`から「一時的なアドオンを読み込む」→`dist/manifest.json`を選択
 
 # Test
 
@@ -156,6 +160,6 @@ npm test
 
 The MIT License(MIT)
 
-Copyright(c) 2019-2021 aoisupersix
+Copyright(c) 2019-2026 aoisupersix
 
 [license.md](license.md)
